@@ -1,0 +1,50 @@
+* { box-sizing: border-box; }
+:root { --navy:#172554; --blue:#2457d6; --blue-dark:#1d43a7; --muted:#64748b; --surface:#fff; --background:#f2f6fc; }
+body { margin:0; padding:28px 16px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,Tahoma,sans-serif; color:#18243b; background:radial-gradient(circle at top right,#e1ebff 0,transparent 38%),var(--background); line-height:1.65; }
+.container { max-width:850px; margin:0 auto; }
+.hero,.card { background:var(--surface); border:1px solid rgba(219,228,240,.85); border-radius:20px; box-shadow:0 12px 32px rgba(28,48,84,.07); padding:clamp(20px,4vw,34px); margin-bottom:22px; }
+.hero { text-align:center; }
+.university-logo { display:block; width:min(100%,300px); max-height:150px; object-fit:contain; margin:0 auto 20px; border-radius:8px; }
+.course-tag { display:inline-block; background:#eaf0ff; color:var(--blue-dark); border-radius:999px; padding:5px 14px; font-weight:700; font-size:.88rem; }
+h1 { color:var(--navy); font-size:clamp(1.8rem,5vw,2.5rem); margin:12px 0 0; }
+h2 { color:var(--navy); font-size:1.35rem; margin:0 0 12px; }
+.subtitle { color:var(--muted); direction:ltr; margin:3px 0 22px; }
+.student-info { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 18px; text-align:right; background:#f7f9fe; border:1px solid #e8eef8; border-radius:14px; padding:14px 18px; }
+.student-info p { margin:0; overflow-wrap:anywhere; }
+.hint { color:var(--muted); font-size:.94rem; margin-top:0; }
+.grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.field { min-width:0; }
+label { display:block; font-weight:700; margin:0 0 7px; }
+input,select { width:100%; min-height:48px; padding:11px 13px; font:inherit; font-size:1rem; color:#18243b; background:#fff; border:1px solid #cbd5e1; border-radius:10px; }
+input:focus,select:focus { outline:3px solid #dbe7ff; border-color:var(--blue); }
+.collision-field { margin-top:18px; }
+.buttons { display:flex; gap:12px; margin-top:20px; }
+button { min-height:48px; flex:1; border:0; border-radius:10px; padding:12px 16px; font:inherit; font-weight:700; cursor:pointer; background:var(--blue); color:white; }
+button:hover { background:var(--blue-dark); }
+button:focus-visible { outline:3px solid #9bb7ff; outline-offset:2px; }
+button.secondary { background:#e8edf5; color:#24334e; }
+button.secondary:hover { background:#dbe3ef; }
+.result { margin-top:22px; padding:18px; border:1px solid #c9e7d8; background:#f0fbf5; border-radius:14px; overflow-wrap:anywhere; }
+.result h3 { margin:0 0 8px; color:#166534; }
+.result p { margin:7px 0; }
+.result .total { font-weight:800; font-size:1.08rem; }
+.formula-row { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0; border-bottom:1px solid #edf1f7; }
+.formula-row:last-of-type { border-bottom:0; }
+code { direction:ltr; unicode-bidi:isolate; background:#f1f5ff; color:#1d43a7; padding:6px 10px; border-radius:8px; white-space:normal; text-align:left; }
+footer { text-align:center; color:var(--muted); padding:8px 0 18px; font-size:.9rem; direction:ltr; }
+@media(max-width:560px) { body{padding:12px 10px;} .student-info,.grid{grid-template-columns:1fr;} .buttons{flex-direction:column;} .formula-row{align-items:flex-start;flex-direction:column;gap:7px;} .university-logo{width:min(100%,240px);max-height:125px;} }
+
+
+/* Keep Arabic page layout RTL, but display numeric signs naturally. */
+input[type="number"] {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
+.result b,
+.result .total,
+.result code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}

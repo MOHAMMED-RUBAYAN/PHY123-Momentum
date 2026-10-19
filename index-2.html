@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PHY 123 one-dimensional linear momentum calculator">
+  <title>PHY 123 | حاسبة الزخم الخطي</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <img class="university-logo" src="majmaah-logo.jpg" alt="شعار جامعة المجمعة">
+      <span class="course-tag">PHY 123 • Physics</span>
+      <h1>حاسبة الزخم الخطي</h1>
+      <p class="subtitle">One-Dimensional Linear Momentum</p>
+      <div class="student-info">
+        <p><strong>الطالب:</strong> محمد خالد بن ربيعان</p>
+        <p><strong>الرقم الجامعي:</strong> 471104117</p>
+        <p><strong>المقرر:</strong> PHY 123</p>
+        <p><strong>المدرس:</strong> أنور الجبالي</p>
+      </div>
+    </header>
+    <section class="card">
+      <h2>بيانات الجسمين</h2>
+      <p class="hint">أدخل الكتل بالكيلوغرام والسرعات بالمتر/ثانية. السرعة الموجبة باتجاه +x والسالبة باتجاه −x.</p>
+      <div class="grid">
+        <div class="field"><label for="m1">كتلة الجسم الأول (kg)</label><input id="m1" type="number" min="0.000001" step="any" value="900"></div>
+        <div class="field"><label for="v1">سرعة الجسم الأول (m/s)</label><input id="v1" type="number" step="any" value="20" dir="ltr"></div>
+        <div class="field"><label for="m2">كتلة الجسم الثاني (kg)</label><input id="m2" type="number" min="0.000001" step="any" value="1800"></div>
+        <div class="field"><label for="v2">سرعة الجسم الثاني (m/s)</label><input id="v2" type="number" step="any" value="10" dir="ltr"></div>
+      </div>
+      <div class="field collision-field">
+        <label for="collision">نوع التصادم</label>
+        <select id="collision">
+          <option value="inelastic">غير مرن تمامًا (يلتصق الجسمان)</option>
+          <option value="elastic">مرن (في بعد واحد)</option>
+        </select>
+      </div>
+      <div class="buttons"><button id="calculate" type="button">احسب النتائج</button><button id="reset" type="button" class="secondary">إعادة تعيين</button></div>
+      <div id="result" class="result" aria-live="polite" hidden></div>
+    </section>
+    <section class="card formulas">
+      <h2>القوانين المستخدمة</h2>
+      <div class="formula-row"><span>زخم الجسم</span><code>p = mv</code></div>
+      <div class="formula-row"><span>الزخم الكلي</span><code>p = m₁v₁ + m₂v₂</code></div>
+      <div class="formula-row"><span>السرعة النهائية في التصادم غير المرن تمامًا</span><code>vƒ = (m₁v₁ + m₂v₂) / (m₁ + m₂)</code></div>
+      <p class="hint">الحسابات في هذا الموقع تقتصر على بعد واحد (محور x).</p>
+    </section>
+    <footer>PHY 123 · One-Dimensional Momentum Calculator</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
