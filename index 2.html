@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHY 123 | حاسبة زخم جسمين</title>
+<style>
+:root{--navy:#142541;--blue:#2859d8;--light:#eef3ff;--muted:#63718a;--line:#dce4f0;--green:#087a56}
+*{box-sizing:border-box}body{margin:0;padding:24px 14px;background:linear-gradient(135deg,#eaf0ff,#f8fbff 55%,#e7f8f0);font-family:Tahoma,Arial,sans-serif;color:#18243b}
+main{max-width:850px;margin:auto}.hero{text-align:center;padding:12px 8px 24px}.tag{display:inline-block;border-radius:30px;background:#dce7ff;color:#234bb2;padding:7px 14px;font-size:13px;font-weight:bold}
+h1{font-size:clamp(27px,5vw,40px);color:var(--navy);margin:13px 0 8px}.subtitle{color:var(--muted);line-height:1.8;margin:0}
+.identity{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px;text-align:right}
+.identity div{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}.identity small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.identity strong{font-size:14px;overflow-wrap:anywhere}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:17px;box-shadow:0 10px 30px #20345b0c}
+h2{font-size:20px;color:var(--navy);margin:0 0 17px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-weight:bold;font-size:14px;margin-bottom:7px}input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;background:#fff;color:#17233d}
+input:focus,select:focus{outline:3px solid #2859d822;border-color:var(--blue)}.hint,.note{font-size:12px;color:var(--muted);line-height:1.8;margin-top:6px}
+button{border:0;border-radius:10px;padding:13px 17px;font:inherit;font-weight:bold;cursor:pointer}.primary{background:var(--blue);color:#fff;flex:1}.secondary{background:#edf1f8;color:var(--navy)}
+.actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}.formula{direction:ltr;text-align:center;background:var(--light);border-radius:10px;padding:13px;margin:10px 0;font-size:clamp(16px,3vw,20px);font-weight:bold;overflow-wrap:anywhere}
+#result{display:none;background:#effaf5;border:1px solid #b6e5d2;border-radius:14px;padding:18px;margin-top:18px;line-height:1.9}#result h3{margin:0;color:var(--green)}.answer{direction:ltr;text-align:center;color:var(--green);font-size:clamp(27px,5vw,37px);font-weight:bold;margin:10px}
+.error{color:#b42318;margin-top:12px}.note{margin-top:14px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px}
+@media(max-width:620px){.identity{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.card{padding:17px}}
+</style></head>
+<body><main>
+<header class="hero">
+<span class="tag">PHY 123 · LINEAR MOMENTUM & COLLISIONS</span>
+<h1>حاسبة زخم جسمين</h1>
+<p class="subtitle">حساب الزخم والتصادم في بعد واحد فقط (One Dimension) على محور <bdi dir="ltr">x</bdi>.</p>
+<div class="identity">
+<div><small>اسم الطالب</small><strong>محمد خالد بن ربيعان</strong></div>
+<div><small>الرقم الجامعي</small><strong dir="ltr">471104117</strong></div>
+<div><small>اسم الدكتور</small><strong>أنور الجبالي</strong></div>
+</div>
+</header>
+<section class="card">
+<h2>بيانات الجسمين</h2>
+<div class="grid">
+<div><label for="m1">كتلة الجسم الأول m₁ (kg)</label><input id="m1" type="number" min="0" step="any" value="900"></div>
+<div><label for="v1">سرعة الجسم الأول v₁ (m/s)</label><input id="v1" type="number" step="any" value="20"><div class="hint">موجب باتجاه +x، وسالب باتجاه −x.</div></div>
+<div><label for="m2">كتلة الجسم الثاني m₂ (kg)</label><input id="m2" type="number" min="0" step="any" value="1800"></div>
+<div><label for="v2">سرعة الجسم الثاني v₂ (m/s)</label><input id="v2" type="number" step="any" value="10"><div class="hint">استخدم الإشارة لتحديد اتجاه الحركة على محور x.</div></div>
+</div>
+<div style="margin-top:17px"><label for="type">نوع التصادم</label><select id="type"><option value="stick">تصادم غير مرن تمامًا — الجسمان يلتصقان</option><option value="elastic">تصادم مرن — الجسمان لا يلتصقان</option></select></div>
+<div class="actions"><button class="primary" onclick="calculate()">احسب</button><button class="secondary" onclick="resetForm()">إعادة القيم الافتراضية</button></div>
+<div id="error" class="error" role="alert"></div>
+<div id="result" aria-live="polite"><h3>النتائج</h3><div id="details"></div><div id="answer" class="answer"></div><div id="formula" class="formula"></div><div id="extra" class="note"></div></div>
+</section>
+<section class="card">
+<h2>القوانين</h2>
+<p><b>الزخم الخطي:</b></p><div class="formula">p = m × v</div>
+<p><b>حفظ الزخم في نظام معزول:</b></p><div class="formula">m₁v₁ + m₂v₂ = constant</div>
+<p><b>عند التصادم غير المرن تمامًا (يلتصق الجسمان):</b></p><div class="formula">v_f = (m₁v₁ + m₂v₂) / (m₁ + m₂)</div>
+<p class="note">الحسابات هنا أحادية البعد على محور x فقط. في التصادم المرن، يُحفظ الزخم والطاقة الحركية، وتحتاج السرعتان النهائيتان إلى تطبيق المعادلتين معًا.</p>
+</section>
+<footer>مشروع الطالب · PHY 123 · One-Dimensional Momentum Calculator</footer>
+</main>
+<script>
+const el=id=>document.getElementById(id);
+const fmt=n=>n.toLocaleString('en-US',{maximumFractionDigits:4});
+function calculate(){
+ el('error').textContent='';
+ const fields=['m1','v1','m2','v2'];
+ if(fields.some(id=>el(id).value.trim()==='')){el('error').textContent='فضلاً أدخل جميع القيم.';return}
+ const [m1,v1,m2,v2]=fields.map(id=>Number(el(id).value));
+ if(![m1,v1,m2,v2].every(Number.isFinite)||m1<=0||m2<=0){el('error').textContent='الكتلة يجب أن تكون أكبر من صفر، وأدخل سرعات صحيحة.';return}
+ const p1=m1*v1,p2=m2*v2,p=p1+p2;
+ el('details').innerHTML=`زخم الجسم الأول: <bdi dir="ltr">${fmt(p1)} kg·m/s</bdi><br>زخم الجسم الثاني: <bdi dir="ltr">${fmt(p2)} kg·m/s</bdi><br>الزخم الكلي قبل التصادم: <bdi dir="ltr">${fmt(p)} kg·m/s</bdi>`;
+ if(el('type').value==='stick'){
+  const vf=p/(m1+m2);
+  el('answer').textContent=`السرعة النهائية = ${fmt(vf)} m/s`;
+  el('formula').textContent=`vf = (${fmt(m1)}×${fmt(v1)} + ${fmt(m2)}×${fmt(v2)}) / (${fmt(m1)} + ${fmt(m2)})`;
+  el('extra').textContent='الاتجاه: '+(vf>0?'باتجاه +x':vf<0?'باتجاه −x':'السرعة النهائية تساوي صفرًا')+'. الجسمان يتحركان معًا بعد التصادم.';
+ }else{
+  el('answer').textContent=`الزخم الكلي = ${fmt(p)} kg·m/s`;
+  el('formula').textContent=`p = ${fmt(m1)}×${fmt(v1)} + ${fmt(m2)}×${fmt(v2)} = ${fmt(p)}`;
+  el('extra').textContent='لا يمكن تحديد السرعة النهائية لكل جسم من حفظ الزخم وحده؛ يجب أيضًا استخدام حفظ الطاقة الحركية.';
+ }
+ el('result').style.display='block';
+}
+function resetForm(){el('m1').value=900;el('v1').value=20;el('m2').value=1800;el('v2').value=10;el('type').value='stick';el('result').style.display='none';el('error').textContent='';}
+calculate();
+</script></body></html>
